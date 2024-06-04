@@ -42,6 +42,8 @@ public class PokemanMain {
 		 * "pass-by-reference", not "pass-by-value" like primitive types, so any
 		 * modifications to "deck" in this method will persist outside of initDeck
 		 */
+		
+		//TODO: write this now
 	}
 	
 	
