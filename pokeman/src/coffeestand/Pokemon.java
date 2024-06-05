@@ -9,8 +9,9 @@ public abstract class Pokemon {
 	 * 
 	 * @see Type
 	 */
-	Type TYPE;
-	int MAX_HEALTH, ATTACK, DEFENSE, SPEED;
+	final Type TYPE;
+	final int MAX_HEALTH, ATTACK, DEFENSE, SPEED;
+	int hp;
 
 	public Pokemon(final Type TYPE, final int MAX_HEALTH, final int ATTACK, final int DEFENSE, final int SPEED) {
 		this.TYPE = TYPE;
@@ -18,6 +19,7 @@ public abstract class Pokemon {
 		this.ATTACK = ATTACK;
 		this.DEFENSE = DEFENSE;
 		this.SPEED = SPEED;
+		hp = MAX_HEALTH;
 	}
 
 	double takeDamage(double baseDmg, Type atkType) {
