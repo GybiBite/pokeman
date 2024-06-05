@@ -1,6 +1,5 @@
 package coffeestand;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Stack;
 
@@ -13,13 +12,8 @@ public class PokemanMain {
 	 * 
 	 * TODO: Replace second "Integer" with type "Card" once implemented
 	 */
-	static final Map<Integer, Integer> CARDS = null;
-	
-	/*
-	 * This will represent the list of cards currently in each player's hand
-	 */
-	static final ArrayList<Integer> PLAYER1_HAND = null;
-	static final ArrayList<Integer> PLAYER2_HAND = null;
+	static final Map<Integer, Integer> POKEMONS = null;
+	static final Player[] PLAYERS = {new Player(), new Player()};
 
 	public static void main(String[] args) {
 		/**
