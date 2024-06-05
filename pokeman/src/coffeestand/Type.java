@@ -118,6 +118,31 @@ public enum Type {
 		}
 
 	};
+	Ice {
+		@override
+		public boolean hasWeakness(Type t) {
+
+			return false;
+		}
+		@override
+		public boolean hasStrength(Type t) {
+
+			return false;
+		}
+	
+	};
+	Fighting {
+		@override
+		public boolean hasWeakness(Type t) {
+
+			return false;
+		}
+		@override
+		public boolean hasStrength(Type t) {
+
+			retune false;
+		}
+	};
 
 	/**
 	 * <p>Defines whether the current type is weak to the type specified in variable t</p>
