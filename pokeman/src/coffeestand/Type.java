@@ -119,12 +119,12 @@ public enum Type {
 
 	};
 	Ice {
-		@override
+		@Override
 		public boolean hasWeakness(Type t) {
 
 			return false;
 		}
-		@override
+		@Override
 		public boolean hasStrength(Type t) {
 
 			return false;
@@ -132,7 +132,19 @@ public enum Type {
 	
 	};
 	Fighting {
-		@override
+		@Override
+		public boolean hasWeakness(Type t) {
+
+			return false;
+		}
+		@Override
+		public boolean hasStrength(Type t) {
+
+			return false;
+		}
+	};
+	Fairy {
+		@Override
 		public boolean hasWeakness(Type t) {
 
 			return false;
@@ -140,7 +152,7 @@ public enum Type {
 		@override
 		public boolean hasStrength(Type t) {
 
-			retune false;
+			return false;
 		}
 	};
 
