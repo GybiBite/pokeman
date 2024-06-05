@@ -1,11 +1,19 @@
 package coffeestand;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Player {
-	static final List<Pokemon> PARTY = null;
+	final ArrayList<Pokemon> PARTY;
+	Pokemon currPkmn = null;
 	
-	public Player() {
-		
+	public Player(final ArrayList<Pokemon> PARTY) {
+		this.PARTY = PARTY;
+		currPkmn = PARTY.get(0);
 	}
+	
+	public boolean hasLost() {
+		return PARTY.isEmpty();
+	}
+	
+	
 }
