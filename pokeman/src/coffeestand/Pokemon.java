@@ -3,17 +3,27 @@ package coffeestand;
 import static coffeestand.Type.*;
 
 public abstract class Pokemon {
-	final Type TYPE;
+	/**
+	 * What type variant the Pokemon is set as
+	 * <li>This will be defined in the constructor</li>
+	 * 
+	 * @see Type
+	 */
+	Type TYPE;
 	int MAX_HEALTH, ATTACK, DEFENSE, SPEED;
-	
-	public Pokemon(final Type type) {
-		this.TYPE = type;
+
+	public Pokemon(final Type TYPE, final int MAX_HEALTH, final int ATTACK, final int DEFENSE, final int SPEED) {
+		this.TYPE = TYPE;
+		this.MAX_HEALTH = MAX_HEALTH;
+		this.ATTACK = ATTACK;
+		this.DEFENSE = DEFENSE;
+		this.SPEED = SPEED;
 	}
-	
+
 	double takeDamage(double baseDmg, Type atkType) {
-		if(TYPE.hasWeakness(atkType)){
+		if (TYPE.hasWeakness(atkType)) {
 			return baseDmg * 1.25;
-		} else if(TYPE.hasStrength(atkType)) {
+		} else if (TYPE.hasStrength(atkType)) {
 			return baseDmg * 0.75;
 		} else {
 			return baseDmg;
@@ -23,10 +33,6 @@ public abstract class Pokemon {
 
 class Charmander extends Pokemon {
 	public Charmander() {
-		super(Fire);
-		MAX_HEALTH = 39;
-		ATTACK = 52;
-		DEFENSE = 43;
-		SPEED = 65;
+		super(Fire, 39, 52, 43, 65);
 	}
 }
