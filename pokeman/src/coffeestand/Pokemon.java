@@ -38,3 +38,44 @@ class Charmander extends Pokemon {
 		super(Fire, 39, 52, 43, 65);
 	}
 }
+
+class electrode extends Pokemon {
+	public electrode() {
+		super(Electric, 60, 50, 70, 150);
+	}
+}
+
+class oddish extends Pokemon {
+	public oddish() {
+		super(Poison, 45, 50, 55, 30);
+	}
+}
+
+class jigglyPuff extends Pokemon {
+	public jigglyPuff() {
+		super(Fairy, 115, 45, 20, 20);
+	}
+}
+
+class machoke extends Pokemon {
+	public machoke() {
+		super(Fighting, 80, 100, 70, 45);
+	}
+}
+
+class cloyster extends Pokemon {
+	public cloyster() {
+		super(Ice, 50, 95, 180, 70);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
