@@ -37,9 +37,9 @@ public class PokemanMain {
 			int pkmnPerParty = promptNumberReadLine(scanner, "How many pokemon would you like each player to have?", 6);
 			PLAYERS[0] = new Player(initParty(pkmnPerParty));
 			PLAYERS[1] = new Player(initParty(pkmnPerParty));
-			
+
 			while (!(PLAYERS[0].hasLost() || PLAYERS[1].hasLost())) {
-				
+
 			}
 		}
 	}
@@ -79,23 +79,63 @@ public class PokemanMain {
 
 		return num;
 	}
-	
+
 	/**
 	 * This is a special method to calculate the damage to be dealt in battle based
 	 * on the official formula from Pokemon Red & Blue. It is a direct (and sloppy)
 	 * translation from math, to code. Any constants specified are supposed to be
 	 * variables, but a lot of features are absent from our battle game that are
-	 * supposed to be in the real ones.
+	 * supposed to be in the real one.
 	 * 
-	 * @param m The move used by the attacker
+	 * @param m   The move used by the attacker
 	 * @param atk The attacking Pokemon
 	 * @param def The defending Pokemon
 	 * 
 	 * @return Damage output based on the factors supplied through the parameters
 	 * 
-	 * @see <a href="https://bulbapedia.bulbagarden.net/wiki/Damage#Generation_I">Damage - Bulbapedia</a>
+	 * @see <a href=
+	 *      "https://bulbapedia.bulbagarden.net/wiki/Damage#Generation_I">Damage -
+	 *      Bulbapedia</a>
 	 */
 	public static int calcDamage(Move m, Pokemon atk, Pokemon def) {
-		return 0;
+		/* Level is the level of the attacking Pokémon. */
+		int level = 10;
+		/* Critical is 2 for a critical hit, and 1 otherwise. */
+		int critical = 1;
+		/* A is the effective Attack stat of the attacking Pokémon */
+		int atkDmg = atk.ATTACK;
+		/* D is the effective Defense stat of the target */
+		int defDmg = def.DEFENSE;
+		/* Power is the power of the used move. */
+		int mPower = m.basePower;
+		/* STAB is the same-type attack bonus. */
+		double stab = 1;
+		if (m.type == atk.TYPE) {
+			stab = 1.5;
+		}
+		/*
+		 * Type1 is the type effectiveness of the used move against the target's type
+		 * that comes first in the type matchup table, or only type if it only has one
+		 * type.
+		 */
+		double type1 = 1;
+		if(def.TYPE.hasWeakness(m.type)) {
+			type1 = 2;
+		} else if (def.TYPE.hasStrength(m.type)) {
+			type1 = 0.5;
+		}
+		
+		/* If the target only has one type, Type2 is 1. */
+		int type2 = 1;
+		/*
+		 * random is realized as a multiplication by a random uniformly distributed
+		 * integer between 217 and 255 (inclusive), followed by an integer division by
+		 * 255.
+		 */
+		double rand = (rng.nextInt(16) + 85) / 100; //(rng.nextInt(217, 255) / 255);
+		
+		double sectA = (2*level*critical)/5+2;
+		double sectB = Math.floor(((sectA * mPower * atkDmg/defDmg)/50) + 2);
+		return (int) Math.floor(sectB * stab * type1 * type2 * rand);
 	}
 }

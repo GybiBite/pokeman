@@ -5,7 +5,9 @@ import static coffeestand.Type.*;
 public enum Move {
 	Tackle(Normal, 40, 100),
 	Ember(Fire, 40, 100),
-	DynamicPunch(Fighting, 100, 50);
+	DynamicPunch(Fighting, 100, 50),
+	SelfDestruct(Normal, 130, 100),
+	Thunderbolt(Electric, 95, 100);
 	
 	public final Type type;
 	public final int basePower;
