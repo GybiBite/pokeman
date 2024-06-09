@@ -1,6 +1,7 @@
 package coffeestand;
 
 import static coffeestand.Type.*;
+import static coffeestand.Move.*;
 
 public abstract class Pokemon {
 	/**
@@ -12,7 +13,7 @@ public abstract class Pokemon {
 	final Type TYPE;
 	final int MAX_HEALTH, ATTACK, DEFENSE, SPEED;
 	int hp;
-//	final ArrayList<>
+	Move[] MOVES;
 
 	public Pokemon(final Type TYPE, final int MAX_HEALTH, final int ATTACK, final int DEFENSE, final int SPEED) {
 		this.TYPE = TYPE;
@@ -36,12 +37,14 @@ public abstract class Pokemon {
 class Charmander extends Pokemon {
 	public Charmander() {
 		super(Fire, 39, 52, 43, 65);
+		MOVES = new Move[] {Tackle, Ember};
 	}
 }
 
 class Electrode extends Pokemon {
 	public Electrode() {
 		super(Electric, 60, 50, 70, 150);
+		MOVES = new Move[] {Tackle, SelfDestruct, Thunderbolt};
 	}
 }
 

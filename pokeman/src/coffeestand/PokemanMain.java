@@ -39,7 +39,12 @@ public class PokemanMain {
 			PLAYERS[1] = new Player(initParty(pkmnPerParty));
 
 			while (!(PLAYERS[0].hasLost() || PLAYERS[1].hasLost())) {
-
+				for (int i = 0; i < PLAYERS.length; i++) {
+					System.out.println("-----------------");
+					System.out.format("Player %f's turn!", i + 1);
+					System.out.println("-----------------");
+					menuMain(PLAYERS[i]);
+				}
 			}
 		}
 	}
@@ -119,12 +124,12 @@ public class PokemanMain {
 		 * type.
 		 */
 		double type1 = 1;
-		if(def.TYPE.hasWeakness(m.type)) {
+		if (def.TYPE.hasWeakness(m.type)) {
 			type1 = 2;
 		} else if (def.TYPE.hasStrength(m.type)) {
 			type1 = 0.5;
 		}
-		
+
 		/* If the target only has one type, Type2 is 1. */
 		int type2 = 1;
 		/*
@@ -132,10 +137,35 @@ public class PokemanMain {
 		 * integer between 217 and 255 (inclusive), followed by an integer division by
 		 * 255.
 		 */
-		double rand = (rng.nextInt(16) + 85) / 100; //(rng.nextInt(217, 255) / 255);
-		
-		double sectA = (2*level*critical)/5+2;
-		double sectB = Math.floor(((sectA * mPower * atkDmg/defDmg)/50) + 2);
+		double rand = (rng.nextInt(16) + 85) / 100; // (rng.nextInt(217, 255) / 255);
+
+		double sectA = (2 * level * critical) / 5 + 2;
+		double sectB = Math.floor(((sectA * mPower * atkDmg / defDmg) / 50) + 2);
 		return (int) Math.floor(sectB * stab * type1 * type2 * rand);
+	}
+
+	static void menuMain(Player p) {
+		System.out.println();
+		System.out.println("1. Fight");
+		System.out.println("2. Party");
+		int choice = promptNumberReadLine(scanner, "Pick an option", 2);
+		switch (choice) {
+		case 1:
+			menuFight(p);
+		case 2:
+		default:
+			menuMain(p);
+		}
+	}
+	
+	static void menuFight(Player p) {
+		System.out.println();
+		for(int i = 0; i < p.currPkmn.MOVES.length; i++) {
+			System.out.format("%f. %f", i+1, p.currPkmn.MOVES[i].name);
+		}
+		
+		int choice = promptNumberReadLine(scanner, "Pick an option", p.currPkmn.MOVES.length + 1);
+		
+//		p.currPkmn.getClass().getSimpleName()
 	}
 }
