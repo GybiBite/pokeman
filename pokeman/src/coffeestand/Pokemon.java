@@ -76,3 +76,38 @@ class Cloyster extends Pokemon {
 		MOVES = new Move[] { Tackle };
 	}
 }
+
+class Bulbasaur extends Pokemon {
+	public Bulbasaur() {
+		super(Grass, 45, 49, 49, 45);
+		MOVES = new Move[] {Tackle, Leech Seed};
+	}
+}
+
+class Squirtle extends Pokemon {
+	public Squirtle() {
+		super(Water, 44, 48, 65, 43);
+		MOVES = new Move[] {Tackle, Bubble};
+	}
+}
+
+class Geodude extends Pokemon {
+	public Geodude() {
+		super(Ground, 40, 80, 100, 20);
+		MOVES = new Move[] {Tackle, Bulldoze};
+	}
+}
+
+class Pidgey extends Pokemon {
+	public Pidgey() {
+		super(Flying, 40, 45, 40, 56);
+		MOVES = new Move[] {Tackle, Gust};
+	}
+}
+
+class Snorlax extends Pokemon {
+	public Snorlax() {
+		super(Normal, 160, 110, 65, 30);
+		MOVES = new Move[] {Tackle, Body Slam};
+	}
+}
