@@ -87,7 +87,7 @@ class Bulbasaur extends Pokemon {
 class Squirtle extends Pokemon {
 	public Squirtle() {
 		super(Water, 44, 48, 65, 43);
-		MOVES = new Move[] {Tackle, Bubble};
+		MOVES = new Move[] {Tackle, WaterGun};
 	}
 }
 
