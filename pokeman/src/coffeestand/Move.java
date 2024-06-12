@@ -7,11 +7,11 @@ public enum Move {
 	Ember("Ember", Fire, 40, 100),
 	DynamicPunch("Dynamic Punch", Fighting, 100, 50),
 	SelfDestruct("Self Destruct", Normal, 130, 100),
-	Thunderbolt("Thunderbolt", Electric, 95, 100);
-	RazorLeaf("Razor Leaf", Grass, 55, 95);
-	WaterGun("Water Gun", Water, 40, 100);
-	Bulldoze("Bulldoze", Ground, 60, 100);
-	Gust("Gust", Flying, 40, 100);
+	Thunderbolt("Thunderbolt", Electric, 95, 100),
+	RazorLeaf("Razor Leaf", Grass, 55, 95),
+	WaterGun("Water Gun", Water, 40, 100),
+	Bulldoze("Bulldoze", Ground, 60, 100),
+	Gust("Gust", Flying, 40, 100),
 	BodySlam("Body Slam", Normal, 85, 100);
 	
 	public final Type type;
