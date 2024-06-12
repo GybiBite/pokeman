@@ -20,6 +20,11 @@ public class PokemanMain {
 		POKEMONS.add(new JigglyPuff());
 		POKEMONS.add(new Machoke());
 		POKEMONS.add(new Cloyster());
+		POKEMONS.add(new Bulbasaur());
+		POKEMONS.add(new Squirtle());
+		POKEMONS.add(new Geodude());
+		POKEMONS.add(new Pidgey());
+		POKEMONS.add(new Snorlax());
 	}
 
 	public static void main(String[] args) {
