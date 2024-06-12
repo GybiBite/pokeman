@@ -80,7 +80,7 @@ class Cloyster extends Pokemon {
 class Bulbasaur extends Pokemon {
 	public Bulbasaur() {
 		super(Grass, 45, 49, 49, 45);
-		MOVES = new Move[] {Tackle, Leech Seed};
+		MOVES = new Move[] {Tackle, RazorLeaf};
 	}
 }
 
@@ -108,6 +108,6 @@ class Pidgey extends Pokemon {
 class Snorlax extends Pokemon {
 	public Snorlax() {
 		super(Normal, 160, 110, 65, 30);
-		MOVES = new Move[] {Tackle, Body Slam};
+		MOVES = new Move[] {Tackle, BodySlam};
 	}
 }
