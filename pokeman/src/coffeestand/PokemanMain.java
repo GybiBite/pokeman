@@ -41,7 +41,7 @@ public class PokemanMain {
 			while (!(PLAYERS[0].hasLost() || PLAYERS[1].hasLost())) {
 				for (int i = 0; i < PLAYERS.length; i++) {
 					System.out.println("-----------------");
-					System.out.format("Player %f's turn!", i + 1);
+					System.out.format("Player %d's turn!", i + 1);
 					System.out.println("-----------------");
 					menuMain(PLAYERS[i]);
 				}
@@ -66,7 +66,7 @@ public class PokemanMain {
 		int num = Integer.MIN_VALUE;
 		do {
 			try {
-				System.out.format("%f (1-%f): ", prompt, max);
+				System.out.format("%s (1-%d): ", prompt, max);
 				num = (s.nextInt());
 				if (num > max || num < 1) {
 					num = Integer.MIN_VALUE;
@@ -141,10 +141,11 @@ public class PokemanMain {
 
 		double sectA = (2 * level * critical) / 5 + 2;
 		double sectB = Math.floor(((sectA * mPower * atkDmg / defDmg) / 50) + 2);
+		System.out.println("Calculated Damage: "+ (int) Math.floor(sectB * stab * type1 * type2 * rand));
 		return (int) Math.floor(sectB * stab * type1 * type2 * rand);
 	}
 
-	static void menuMain(Player p) {
+	public static void menuMain(Player p) {
 		System.out.println();
 		System.out.println("1. Fight");
 		System.out.println("2. Party");
@@ -157,15 +158,67 @@ public class PokemanMain {
 			menuMain(p);
 		}
 	}
-	
-	static void menuFight(Player p) {
+	/**
+	 * This method handles the fight sequence for a player's turn in the game.
+	 * It allows the player to choose a move for their current Pokémon, calculates the damage dealt to the opponent's Pokémon,
+	 * and updates the health and status of the Pokémon involved.
+	 * If a Pokémon faints (its health drops to 0 or below), it is removed from the player's party and the next Pokémon becomes active.
+	 * The method also checks for win/loss conditions after each turn.
+	 *
+	 * @param attacker The player who is currently taking their turn and choosing a move.
+	 */
+	public static void menuFight(Player attacker) {
+		Player defender = (attacker == PLAYERS[0]) ? PLAYERS[1] : PLAYERS[0];
+
 		System.out.println();
-		for(int i = 0; i < p.currPkmn.MOVES.length; i++) {
-			System.out.format("%f. %f", i+1, p.currPkmn.MOVES[i].name);
+		System.out.println("Choose a move:");
+		for (int i = 0; i < attacker.currPkmn.MOVES.length; i++) {
+			System.out.format("%d. %s\n", i + 1, attacker.currPkmn.MOVES[i].name);
 		}
-		
-		int choice = promptNumberReadLine(scanner, "Pick an option", p.currPkmn.MOVES.length + 1);
-		
-//		p.currPkmn.getClass().getSimpleName()
+
+		int choice = promptNumberReadLine(scanner, "Pick an option", attacker.currPkmn.MOVES.length);
+		Move chosenMove = attacker.currPkmn.MOVES[choice - 1];
+
+		System.out.println(attacker.currPkmn.getClass().getSimpleName() + " used " + chosenMove.name + "!");
+
+		int damage = calcDamage(chosenMove, attacker.currPkmn, defender.currPkmn);
+		defender.currPkmn.takeDamage(damage);
+
+		System.out.println(defender.currPkmn.getClass().getSimpleName() + " took " + damage + " damage!");
+
+		if (defender.currPkmn.hp <= 0) {
+			System.out.println(defender.currPkmn.getClass().getSimpleName() + " fainted!");
+			defender.PARTY.remove(defender.currPkmn);
+			if (!defender.hasLost()) {
+				defender.currPkmn = defender.PARTY.get(0); // Switch to the next Pokémon in the party
+				System.out.println(defender.currPkmn.getClass().getSimpleName() + " is now active!");
+			} else {
+				System.out.println("Player " + ((defender == PLAYERS[0]) ? "1" : "2") + " has no more Pokémon!");
+			}
+		}
+
+		displayHealthStatus(attacker);
+		displayHealthStatus(defender);
+
+		if (PLAYERS[0].hasLost()) {
+			System.out.println("Player 2 wins!");
+			System.exit(0);
+		} else if (PLAYERS[1].hasLost()) {
+			System.out.println("Player 1 wins!");
+			System.exit(0);
+		}
+	}
+	/**
+	 * This method displays the health status of each Pokémon in a player's party.
+	 * It prints the name and current HP of each Pokémon in the party.
+	 *
+	 * @param player The player whose Pokémon health statuses are to be displayed.
+	 */
+	public static void displayHealthStatus(Player player) {
+		System.out.println("Health status for Player " + ((player == PLAYERS[0]) ? "1" : "2") + ":");
+		for (Pokemon pkmn : player.PARTY) {
+			System.out.println(pkmn.getClass().getSimpleName() + " - HP: " + pkmn.hp + "/" + pkmn.MAX_HEALTH);
+		}
+		System.out.println();
 	}
 }

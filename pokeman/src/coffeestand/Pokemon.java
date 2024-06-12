@@ -51,23 +51,28 @@ class Electrode extends Pokemon {
 class Oddish extends Pokemon {
 	public Oddish() {
 		super(Poison, 45, 50, 55, 30);
+		MOVES = new Move[] { Tackle };
 	}
+
 }
 
 class JigglyPuff extends Pokemon {
 	public JigglyPuff() {
 		super(Fairy, 115, 45, 20, 20);
+		MOVES = new Move[] { Tackle };
 	}
 }
 
 class Machoke extends Pokemon {
 	public Machoke() {
 		super(Fighting, 80, 100, 70, 45);
+		MOVES = new Move[] { Tackle, DynamicPunch };
 	}
 }
 
 class Cloyster extends Pokemon {
 	public Cloyster() {
 		super(Ice, 50, 95, 180, 70);
+		MOVES = new Move[] { Tackle };
 	}
 }
