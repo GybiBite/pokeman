@@ -160,6 +160,8 @@ public class PokemanMain {
 			menuFight(atk, def);
 			return;
 		case 2:
+			menuParty(atk);
+			return;
 		default:
 			menuMain(atk, def);
 		}
@@ -174,14 +176,16 @@ public class PokemanMain {
 	 * @param atk The player who is currently taking their turn and choosing a move.
 	 */
 	public static void menuFight(Player atk, Player def) {
-
-		System.out.println();
-		System.out.println("Choose a move:");
+		
+		System.out.println("Your Pokemon: ");
+		System.out.println(atk.currPkmn.getClass().getSimpleName() + " - HP: " + atk.currPkmn.hp + "/" + atk.currPkmn.MAX_HEALTH);
+		System.out.println("Their pokemon: ");
+		System.out.println(def.currPkmn.getClass().getSimpleName() + " - HP: " + def.currPkmn.hp + "/" + def.currPkmn.MAX_HEALTH);
 		for (int i = 0; i < atk.currPkmn.MOVES.length; i++) {
 			System.out.format("%d. %s\n", i + 1, atk.currPkmn.MOVES[i].name);
 		}
 
-		int choice = promptNumberReadLine(scanner, "Pick an option", atk.currPkmn.MOVES.length);
+		int choice = promptNumberReadLine(scanner, "Choose a move", atk.currPkmn.MOVES.length);
 		Move chosenMove = atk.currPkmn.MOVES[choice - 1];
 
 		System.out.println(atk.currPkmn.getClass().getSimpleName() + " used " + chosenMove.name + "!");
@@ -201,10 +205,7 @@ public class PokemanMain {
 				System.out.println("Player " + ((def == PLAYERS[0]) ? "1" : "2") + " has no more Pokémon!");
 			}
 		}
-
-		displayHealthStatus(atk);
-		displayHealthStatus(def);
-
+		
 		if (PLAYERS[0].hasLost()) {
 			System.out.println("Player 2 wins!");
 			System.exit(0);
@@ -213,6 +214,14 @@ public class PokemanMain {
 			System.exit(0);
 		}
 	}
+	
+	public static void menuParty(Player player) {
+		displayHealthStatus(player);
+		int choice = promptNumberReadLine(scanner, "Pick a pokemon", player.PARTY.size()) - 1;
+		System.out.println(player.PARTY.get(choice).getClass().getSimpleName() + ", I choose you!");
+		player.currPkmn = player.PARTY.get(choice);
+	}
+	
 	/**
 	 * This method displays the health status of each Pokémon in a player's party.
 	 * It prints the name and current HP of each Pokémon in the party.
@@ -220,9 +229,10 @@ public class PokemanMain {
 	 * @param player The player whose Pokémon health statuses are to be displayed.
 	 */
 	public static void displayHealthStatus(Player player) {
-		System.out.println("Health status for Player " + ((player == PLAYERS[0]) ? "1" : "2") + ":");
-		for (Pokemon pkmn : player.PARTY) {
-			System.out.println(pkmn.getClass().getSimpleName() + " - HP: " + pkmn.hp + "/" + pkmn.MAX_HEALTH);
+		System.out.println("Party status for Player " + ((player == PLAYERS[0]) ? "1" : "2") + ":");
+		for(int i = 0; i < player.PARTY.size(); i++) {
+			Pokemon currPkmn = player.PARTY.get(i);
+			System.out.println((i+1) + ". " + currPkmn.getClass().getSimpleName() + " - HP: " + currPkmn.hp + "/" + currPkmn.MAX_HEALTH);
 		}
 		System.out.println();
 	}
